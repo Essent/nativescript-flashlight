@@ -21,12 +21,8 @@ var FlashLight = (function (_super) {
     };
     FlashLight.prototype.on = function (arg) {
         this.checkAvailability();
-        if (!this.camera) {
-            this.init();
-        }
+        this.init();
         if (this.hasCamera2API) {
-            console.log('Test 1');
-            console.dir(this.cameraManager);
             this.cameraManager.setTorchMode(this.camera, true);
         }
         else {
@@ -36,12 +32,8 @@ var FlashLight = (function (_super) {
         this.isOn = true;
     };
     FlashLight.prototype.off = function () {
-        if (!this.camera) {
-            this.init();
-        }
+        this.init();
         if (this.hasCamera2API) {
-            console.log('Test 2');
-            console.dir(this.cameraManager);
             this.cameraManager.setTorchMode(this.camera, false);
         }
         else {
@@ -53,13 +45,12 @@ var FlashLight = (function (_super) {
         this.isOn = false;
     };
     FlashLight.prototype.init = function () {
-        console.log('Init!');
-        if (this.hasCamera2API) {
+        if (this.hasCamera2API && !this.cameraManager) {
             this.appContext = application_1.android.context;
             this.cameraManager = this.appContext.getSystemService('camera');
             this.camera = this.cameraManager.getCameraIdList()[0];
         }
-        else {
+        else if (!this.camera) {
             this.camera = android.hardware.Camera.open(0);
             this.parameters = this.camera.getParameters();
         }
