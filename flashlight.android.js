@@ -53,9 +53,10 @@ var FlashLight = (function (_super) {
         this.isOn = false;
     };
     FlashLight.prototype.init = function () {
+        console.log('Init!');
         if (this.hasCamera2API) {
             this.appContext = application_1.android.context;
-            application_1.android.currentContext.this.cameraManager = this.appContext.getSystemService('camera');
+            this.cameraManager = this.appContext.getSystemService('camera');
             this.camera = this.cameraManager.getCameraIdList()[0];
         }
         else {

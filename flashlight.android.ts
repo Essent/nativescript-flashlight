@@ -20,14 +20,9 @@ export class FlashLight extends FlashLightCommon {
 
     public on(arg: any): void {
         this.checkAvailability();
-
-        if(!this.camera) {
-            this.init();
-        }
+        this.init();
 
         if (this.hasCamera2API) {
-            console.log('Test 1');
-            console.dir(this.cameraManager);
             this.cameraManager.setTorchMode(this.camera, true);
         } else {
             this.parameters.setFlashMode(this.camera.Parameters.FLASH_MODE_TORCH);
@@ -38,13 +33,9 @@ export class FlashLight extends FlashLightCommon {
     }
 
     public off(): void {
-        if(!this.camera) {
-            this.init();
-        }
+        this.init();
 
         if (this.hasCamera2API) {
-            console.log('Test 2');
-            console.dir(this.cameraManager);
             this.cameraManager.setTorchMode(this.camera, false);
         } else {
             this.parameters.setFlashMode(this.camera.Parameters.FLASH_MODE_OFF);
@@ -57,11 +48,11 @@ export class FlashLight extends FlashLightCommon {
     }
 
     private init(): void {
-        if (this.hasCamera2API) {
+        if (this.hasCamera2API && !this.cameraManager) {
             this.appContext = androidApplication.context;
-            androidApplication.currentContext.this.cameraManager = this.appContext.getSystemService('camera'); //TODO: figure out how to use android.content.Context.CAMERA_SERVICE
+            this.cameraManager = this.appContext.getSystemService('camera'); //TODO: figure out how to use android.content.Context.CAMERA_SERVICE
             this.camera = this.cameraManager.getCameraIdList()[0];
-        } else {
+        } else if(!this.camera) {
             this.camera = android.hardware.Camera.open(0);
             this.parameters = this.camera.getParameters();
         }
