@@ -7,6 +7,7 @@ export abstract class FlashLightCommon {
 		} else if(this.isOn === true) {
 			this.off();
 		}
+		this.isOn = !this.isOn;
 	}
 
 	protected checkAvailability(): void {

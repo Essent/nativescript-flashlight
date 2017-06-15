@@ -28,8 +28,6 @@ export class FlashLight extends FlashLightCommon {
             this.parameters.setFlashMode(this.camera.Parameters.FLASH_MODE_TORCH);
             this.camera.setParameters(this.parameters);
         }
-
-        this.isOn = true;
     }
 
     public off(): void {
@@ -43,8 +41,6 @@ export class FlashLight extends FlashLightCommon {
             this.camera.stopPreview();
             this.camera.release();
         }
-
-        this.isOn = false;
     }
 
     private init(): void {
