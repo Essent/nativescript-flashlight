@@ -1,7 +1,7 @@
 export abstract class FlashLightCommon {
 	public isOn: boolean = false;
 
-	public toggle(arg: any): void {
+	public toggle(arg?: any): void {
 		if(this.isOn === false) {
 			this.on(arg);
 		} else if(this.isOn === true) {
@@ -17,7 +17,7 @@ export abstract class FlashLightCommon {
 		}
 	}
 
-	public abstract on(arg: any): void;
+	public abstract on(arg?: any): void;
 	public abstract off(): void;
 	public abstract isAvailable(): boolean;
 }

@@ -34,7 +34,7 @@ export class FlashLight extends FlashLightCommon {
         return packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_CAMERA_FLASH);
     }
 
-    public on(arg: any): void {
+    public on(arg?: any): void {
         this.checkAvailability();
 
         if (this.hasCamera2API) {

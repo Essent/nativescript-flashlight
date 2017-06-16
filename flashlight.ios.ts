@@ -21,7 +21,7 @@ export class FlashLight extends FlashLightCommon {
 		return !!device;
 	}
 
-	public on(arg: any): void {
+	public on(arg?: any): void {
 		this.checkAvailability();
 
 		var intensity = AVCaptureMaxAvailableTorchLevel;
