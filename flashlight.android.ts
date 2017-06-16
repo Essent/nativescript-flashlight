@@ -46,7 +46,7 @@ export class FlashLight extends FlashLightCommon {
     private init(): void {
         if (this.hasCamera2API && !this.cameraManager) {
             this.appContext = androidApplication.context;
-            this.cameraManager = this.appContext.getSystemService('camera'); //TODO: figure out how to use android.content.Context.CAMERA_SERVICE
+            this.cameraManager = this.appContext.getSystemService((<any>android.content.Context).CAMERA_SERVICE);
             this.camera = this.cameraManager.getCameraIdList()[0];
         } else if(!this.camera) {
             this.camera = android.hardware.Camera.open(0);

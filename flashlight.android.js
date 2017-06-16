@@ -29,7 +29,6 @@ var FlashLight = (function (_super) {
             this.parameters.setFlashMode(this.camera.Parameters.FLASH_MODE_TORCH);
             this.camera.setParameters(this.parameters);
         }
-        this.isOn = true;
     };
     FlashLight.prototype.off = function () {
         this.init();
@@ -42,12 +41,11 @@ var FlashLight = (function (_super) {
             this.camera.stopPreview();
             this.camera.release();
         }
-        this.isOn = false;
     };
     FlashLight.prototype.init = function () {
         if (this.hasCamera2API && !this.cameraManager) {
             this.appContext = application_1.android.context;
-            this.cameraManager = this.appContext.getSystemService('camera');
+            this.cameraManager = this.appContext.getSystemService(android.content.Context.CAMERA_SERVICE);
             this.camera = this.cameraManager.getCameraIdList()[0];
         }
         else if (!this.camera) {
