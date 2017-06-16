@@ -1,6 +1,6 @@
 import { FlashLightCommon } from './flashlight.common';
 import { device } from 'platform';
-import { android as androidApplication } from 'application'
+import { android as androidApplication } from 'application';
 
 export class FlashLight extends FlashLightCommon {
     private camera: any;

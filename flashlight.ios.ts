@@ -19,14 +19,12 @@ export class FlashLight extends FlashLightCommon {
 
 		device.lockForConfiguration();
 		device.setTorchModeOnWithLevelError(intensity);
-		device.flashMode = AVCaptureFlashMode.Off;
 		device.unlockForConfiguration();
 	}
 
 	public off(): void {
 		device.lockForConfiguration();
 		device.torchMode = AVCaptureTorchMode.Off;
-		device.flashMode = AVCaptureFlashMode.Off;
 		device.unlockForConfiguration();
 	}
 }

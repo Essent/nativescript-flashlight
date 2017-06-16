@@ -20,13 +20,11 @@ var FlashLight = (function (_super) {
         }
         device.lockForConfiguration();
         device.setTorchModeOnWithLevelError(intensity);
-        device.flashMode = 0;
         device.unlockForConfiguration();
     };
     FlashLight.prototype.off = function () {
         device.lockForConfiguration();
         device.torchMode = 0;
-        device.flashMode = 0;
         device.unlockForConfiguration();
     };
     return FlashLight;
