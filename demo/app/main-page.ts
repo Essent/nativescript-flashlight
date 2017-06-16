@@ -1,7 +1,7 @@
-import { EventData, Observable, PropertyChangeData } from "data/observable";
-import { Page } from "ui/page";
-import { Slider } from "ui/slider";
 import { FlashLight } from "nativescript-flashlight";
+import { EventData, Observable, PropertyChangeData } from 'data/observable';
+import { Page } from 'ui/page';
+import { Slider } from 'ui/slider';
 
 var flashLight: FlashLight = new FlashLight();
 let viewModel = new Observable();
@@ -24,7 +24,9 @@ export function pageLoaded(args: EventData) {
   page.bindingContext = viewModel;
 
   let slider = <Slider>page.getViewById("intensitySlider");
-  slider.on("propertyChange", (args: PropertyChangeData) => {
-    console.log("Intensity set to: " + args.value);
-  });
+  if(slider) {
+    slider.on("propertyChange", (args: PropertyChangeData) => {
+      console.log("Intensity set to: " + args.value);
+    });
+  }
 }
