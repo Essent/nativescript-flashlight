@@ -4,6 +4,6 @@ export declare class FlashLight extends FlashLightCommon {
     constructor();
     static getInstance(): FlashLight;
     isAvailable(): boolean;
-    on(arg: any): void;
+    on(arg?: any): void;
     off(): void;
 }
