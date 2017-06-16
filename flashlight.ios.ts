@@ -2,6 +2,21 @@ import { FlashLightCommon } from './flashlight.common';
 var device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
 
 export class FlashLight extends FlashLightCommon {
+	private static instance: FlashLight = new FlashLight();
+
+	public constructor() {
+		super();
+		if(FlashLight.instance) {
+			throw new Error('Error: Instance failed: Use FlashLight.getInstance() instead of new.');
+		}
+
+		FlashLight.instance = this;
+	}
+
+	static getInstance() {
+		return FlashLight.instance;
+	}
+
 	public isAvailable(): boolean {
 		return !!device;
 	}

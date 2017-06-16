@@ -8,9 +8,25 @@ export class FlashLight extends FlashLightCommon {
     private cameraManager: any;
     private parameters: any;
 
+    private static instance: FlashLight = new FlashLight();
+
     private get hasCamera2API(): boolean {
         let sdkVersion: string = device.sdkVersion.replace('(ios)', '').replace('android', '');
         return parseInt(sdkVersion) > 20;
+    }
+
+    public constructor() {
+        super();
+        if(FlashLight.instance) {
+            throw new Error('Error: Instance failed: Use FlashLight.getInstance() instead of new.');
+        }
+
+        this.init();
+        FlashLight.instance = this;
+    }
+
+    static getInstance() {
+        return FlashLight.instance;
     }
 
     public isAvailable(): boolean {
@@ -20,7 +36,6 @@ export class FlashLight extends FlashLightCommon {
 
     public on(arg: any): void {
         this.checkAvailability();
-        this.init();
 
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, true);
@@ -31,8 +46,6 @@ export class FlashLight extends FlashLightCommon {
     }
 
     public off(): void {
-        this.init();
-
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, false);
         } else {

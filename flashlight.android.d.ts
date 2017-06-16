@@ -4,7 +4,10 @@ export declare class FlashLight extends FlashLightCommon {
     private appContext;
     private cameraManager;
     private parameters;
+    private static instance;
     private readonly hasCamera2API;
+    constructor();
+    static getInstance(): FlashLight;
     isAvailable(): boolean;
     on(arg: any): void;
     off(): void;

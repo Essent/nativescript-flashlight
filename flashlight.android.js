@@ -5,7 +5,13 @@ var application_1 = require("application");
 var FlashLight = (function (_super) {
     __extends(FlashLight, _super);
     function FlashLight() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
+        if (FlashLight.instance) {
+            throw new Error('Error: Instance failed: Use FlashLight.getInstance() instead of new.');
+        }
+        _this.init();
+        FlashLight.instance = _this;
+        return _this;
     }
     Object.defineProperty(FlashLight.prototype, "hasCamera2API", {
         get: function () {
@@ -15,13 +21,15 @@ var FlashLight = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    FlashLight.getInstance = function () {
+        return FlashLight.instance;
+    };
     FlashLight.prototype.isAvailable = function () {
         var packageManager = application_1.android.currentContext.getPackageManager();
         return packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_CAMERA_FLASH);
     };
     FlashLight.prototype.on = function (arg) {
         this.checkAvailability();
-        this.init();
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, true);
         }
@@ -31,7 +39,6 @@ var FlashLight = (function (_super) {
         }
     };
     FlashLight.prototype.off = function () {
-        this.init();
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, false);
         }
@@ -55,5 +62,6 @@ var FlashLight = (function (_super) {
     };
     return FlashLight;
 }(flashlight_common_1.FlashLightCommon));
+FlashLight.instance = new FlashLight();
 exports.FlashLight = FlashLight;
 //# sourceMappingURL=flashlight.android.js.map

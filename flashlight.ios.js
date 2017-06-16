@@ -4,8 +4,16 @@ var device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
 var FlashLight = (function (_super) {
     __extends(FlashLight, _super);
     function FlashLight() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
+        if (FlashLight.instance) {
+            throw new Error('Error: Instance failed: Use FlashLight.getInstance() instead of new.');
+        }
+        FlashLight.instance = _this;
+        return _this;
     }
+    FlashLight.getInstance = function () {
+        return FlashLight.instance;
+    };
     FlashLight.prototype.isAvailable = function () {
         return !!device;
     };
@@ -29,5 +37,6 @@ var FlashLight = (function (_super) {
     };
     return FlashLight;
 }(flashlight_common_1.FlashLightCommon));
+FlashLight.instance = new FlashLight();
 exports.FlashLight = FlashLight;
 //# sourceMappingURL=flashlight.ios.js.map

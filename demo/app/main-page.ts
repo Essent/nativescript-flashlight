@@ -3,7 +3,7 @@ import { EventData, Observable, PropertyChangeData } from 'data/observable';
 import { Page } from 'ui/page';
 import { Slider } from 'ui/slider';
 
-var flashLight: FlashLight = new FlashLight();
+var flashLight: FlashLight = FlashLight.getInstance();
 let viewModel = new Observable();
 viewModel.set("flashlightState", "Turn on");
 viewModel.set("intensity", 50);
