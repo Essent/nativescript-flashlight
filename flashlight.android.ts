@@ -21,6 +21,7 @@ export class FlashLight extends FlashLightCommon {
             throw new Error('Error: Instance failed: Use FlashLight.getInstance() instead of new.');
         }
 
+        this.init();
         FlashLight.instance = this;
     }
 
