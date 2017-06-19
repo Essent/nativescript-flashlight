@@ -21,7 +21,6 @@ export class FlashLight extends FlashLightCommon {
             throw new Error('Error: Instance failed: Use FlashLight.getInstance() instead of new.');
         }
 
-        this.init();
         FlashLight.instance = this;
     }
 
@@ -36,6 +35,7 @@ export class FlashLight extends FlashLightCommon {
 
     public on(arg: any): void {
         this.checkAvailability();
+        this.init();
 
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, true);
@@ -46,6 +46,7 @@ export class FlashLight extends FlashLightCommon {
     }
 
     public off(): void {
+        this.init();
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, false);
         } else {
