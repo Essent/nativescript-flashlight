@@ -8,7 +8,7 @@ export class FlashLight extends FlashLightCommon {
     private cameraManager: any;
     private parameters: any;
 
-    private static instance: FlashLight = new FlashLight();
+    private static instance: FlashLight;
 
     private get hasCamera2API(): boolean {
         let sdkVersion: string = device.sdkVersion.replace('(ios)', '').replace('android', '');
@@ -25,6 +25,9 @@ export class FlashLight extends FlashLightCommon {
     }
 
     static getInstance() {
+        if(!FlashLight.instance) {
+            new FlashLight();
+        }
         return FlashLight.instance;
     }
 
@@ -35,7 +38,6 @@ export class FlashLight extends FlashLightCommon {
 
     public on(arg: any): void {
         this.checkAvailability();
-        this.init();
 
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, true);
@@ -46,7 +48,6 @@ export class FlashLight extends FlashLightCommon {
     }
 
     public off(): void {
-        this.init();
         if (this.hasCamera2API) {
             this.cameraManager.setTorchMode(this.camera, false);
         } else {
@@ -59,6 +60,10 @@ export class FlashLight extends FlashLightCommon {
 
     private init(): void {
         if (this.hasCamera2API && !this.cameraManager) {
+            if(!androidApplication) {
+                console.error('androidApplication is not instantiated, please call the init on a later moment');
+                return;
+            }
             this.appContext = androidApplication.context;
             this.cameraManager = this.appContext.getSystemService((<any>android.content.Context).CAMERA_SERVICE);
             this.camera = this.cameraManager.getCameraIdList()[0];
