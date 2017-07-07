@@ -1,4 +1,4 @@
-import { FlashLight } from "nativescript-flashlight";
+import { FlashLight } from '@essent/nativescript-flashlight';
 import { EventData, Observable, PropertyChangeData } from 'data/observable';
 import { Page } from 'ui/page';
 import { Slider } from 'ui/slider';
