@@ -44,8 +44,13 @@ export class FlashLight extends FlashLightCommon {
         if (this.hasCamera2API === true) {
             this.cameraManager.setTorchMode(this.camera, true);
         } else {
-            this.parameters.setFlashMode(this.camera.Parameters.FLASH_MODE_TORCH);
+            if (isNullOrUndefined(this.camera)) {
+                this.camera = android.hardware.Camera.open();
+                this.parameters = this.camera.getParameters();
+            }
+            this.parameters.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_TORCH);
             this.camera.setParameters(this.parameters);
+            this.camera.startPreview();
         }
         this.isOn = true;
     }
@@ -54,16 +59,19 @@ export class FlashLight extends FlashLightCommon {
         if (this.hasCamera2API === true) {
             this.cameraManager.setTorchMode(this.camera, false);
         } else {
-            this.parameters.setFlashMode(this.camera.Parameters.FLASH_MODE_OFF);
-            this.camera.setParameters(this.parameters);
-            this.camera.stopPreview();
-            this.camera.release();
+            if(!isNullOrUndefined(this.camera)) {
+                this.parameters.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_OFF);
+                this.camera.setParameters(this.parameters);
+                this.camera.stopPreview();
+                this.camera.release();
+                this.camera = undefined;
+            }
         }
         this.isOn = false;
     }
 
     private init(): void {
-        if (this.hasCamera2API === true && isNullOrUndefined(this.cameraManager)) {
+        if (this.hasCamera2API === true) {
             if(isNullOrUndefined(androidApplication)) {
                 console.error('androidApplication is not instantiated, please call the init on a later moment');
                 return;
@@ -71,13 +79,6 @@ export class FlashLight extends FlashLightCommon {
             this.appContext = androidApplication.context;
             this.cameraManager = this.appContext.getSystemService((<any>android.content.Context).CAMERA_SERVICE);
             this.camera = this.cameraManager.getCameraIdList()[0];
-        } else if(isNullOrUndefined(this.camera)) {
-            try {
-                this.camera = android.hardware.Camera.open(0);
-                this.parameters = this.camera.getParameters();
-            } catch (exception) {
-                console.error("camera exception", exception);
-            }
         }
     }
 }
