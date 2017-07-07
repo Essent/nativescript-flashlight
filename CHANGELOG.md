@@ -1,3 +1,8 @@
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/Essent/nativescript-flashlight/compare/v2.0.3...v2.0.4) (2017-07-07)
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/Essent/nativescript-flashlight/compare/v2.0.2...v2.0.3) (2017-07-07)
 
