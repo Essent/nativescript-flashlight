@@ -13,7 +13,7 @@ export class FlashLight extends FlashLightCommon {
 
     private get hasCamera2API(): boolean {
         let sdkVersion: string = device.sdkVersion.replace('(ios)', '').replace('android', '');
-        return parseInt(sdkVersion) > 20;
+        return parseInt(sdkVersion) > 22;
     }
 
     public constructor() {
@@ -72,8 +72,12 @@ export class FlashLight extends FlashLightCommon {
             this.cameraManager = this.appContext.getSystemService((<any>android.content.Context).CAMERA_SERVICE);
             this.camera = this.cameraManager.getCameraIdList()[0];
         } else if(isNullOrUndefined(this.camera)) {
-            this.camera = android.hardware.Camera.open(0);
-            this.parameters = this.camera.getParameters();
+            try {
+                this.camera = android.hardware.Camera.open(0);
+                this.parameters = this.camera.getParameters();
+            } catch (exception) {
+                console.error("camera exception", exception);
+            }
         }
     }
 }
