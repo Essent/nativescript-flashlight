@@ -1,5 +1,5 @@
-import { FlashLightCommon } from './flashlight.common';
-export declare class FlashLight extends FlashLightCommon {
+import { Common } from './flashlight.common';
+export declare class Flashlight extends Common {
     private camera;
     private appContext;
     private cameraManager;
@@ -7,7 +7,7 @@ export declare class FlashLight extends FlashLightCommon {
     private static instance;
     private readonly hasCamera2API;
     constructor();
-    static getInstance(): FlashLight;
+    static getInstance(): Flashlight;
     isAvailable(): boolean;
     on(arg: any): void;
     off(): void;

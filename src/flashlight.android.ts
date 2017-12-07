@@ -1,15 +1,15 @@
-import { FlashLightCommon } from './flashlight.common';
-import { device } from 'platform';
-import { android as androidApplication } from 'application';
-import { isNullOrUndefined } from 'utils/types';
+import { android as androidApplication } from 'tns-core-modules/application';
+import { device } from 'tns-core-modules/platform';
+import { isNullOrUndefined } from 'tns-core-modules/utils/types';
+import { Common } from './flashlight.common';
 
-export class FlashLight extends FlashLightCommon {
+export class Flashlight extends Common {
     private camera: any;
     private appContext: any;
     private cameraManager: any;
     private parameters: any;
 
-    private static instance: FlashLight;
+    private static instance: Flashlight;
 
     private get hasCamera2API(): boolean {
         let sdkVersion: string = device.sdkVersion.replace('(ios)', '').replace('android', '');
@@ -18,19 +18,19 @@ export class FlashLight extends FlashLightCommon {
 
     public constructor() {
         super();
-        if(!isNullOrUndefined(FlashLight.instance)) {
-            throw new Error('Error: Instance failed: Use FlashLight.getInstance() instead of new.');
+        if(!isNullOrUndefined(Flashlight.instance)) {
+            throw new Error('Error: Instance failed: Use Flashlight.getInstance() instead of new.');
         }
 
         this.init();
-        FlashLight.instance = this;
+        Flashlight.instance = this;
     }
 
     static getInstance() {
-        if(isNullOrUndefined(FlashLight.instance)) {
-            FlashLight.instance = new FlashLight();
+        if(isNullOrUndefined(Flashlight.instance)) {
+            Flashlight.instance = new Flashlight();
         }
-        return FlashLight.instance;
+        return Flashlight.instance;
     }
 
     public isAvailable(): boolean {
