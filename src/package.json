@@ -1,7 +1,7 @@
 {
-    "name": "nativescript-flashlight",
+    "name": "@essent/nativescript-flashlight",
     "version": "1.0.0",
-    "description": "Your awesome NativeScript plugin.",
+    "description": "A flashlight NativeScript module for Android and iOS",
     "main": "flashlight",
     "typings": "index.d.ts",
     "nativescript": {
@@ -33,14 +33,14 @@
         "iOS"
     ],
     "author": {
-        "name": "Your Name",
-        "email": "youremail@yourdomain.com"
+        "name": "Nick Dekkers",
+        "email": "nick.dekkers@essent.nl"
     },
     "bugs": {
-        "url": "https://github.com/nickdekkers/nativescript-flashlight/issues"
+        "url": "https://github.com/Essent/nativescript-flashlight/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/nickdekkers/nativescript-flashlight",
+    "homepage": "https://github.com/Essent/nativescript-flashlight",
     "readmeFilename": "README.md",
     "devDependencies": {
         "tns-core-modules": "^3.1.0",

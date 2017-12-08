@@ -1,4 +1,4 @@
-import { Flashlight } from 'nativescript-flashlight';
+import { Flashlight } from '@essent/nativescript-flashlight';
 import { EventData, Observable, PropertyChangeData } from 'tns-core-modules/data/observable';
 import { Page } from 'tns-core-modules/ui/page';
 import { Slider } from 'tns-core-modules/ui/slider';

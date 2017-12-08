@@ -1,5 +1,4 @@
-import { Observable } from 'tns-core-modules/data/observable';
-export declare abstract class Common extends Observable {
+export declare abstract class Common {
     isOn: boolean;
     toggle(arg: any): void;
     protected checkAvailability(): void;
