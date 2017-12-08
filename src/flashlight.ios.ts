@@ -19,7 +19,7 @@ export class Flashlight extends Common {
     }
 
     public isAvailable(): boolean {
-        return !!device && device.hasTorch;
+        return !!device && device.hasTorch && device.torchAvailable;
     }
 
     public on(arg: any): void {
