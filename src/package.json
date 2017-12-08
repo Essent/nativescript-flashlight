@@ -32,10 +32,7 @@
         "Android",
         "iOS"
     ],
-    "author": {
-        "name": "Nick Dekkers",
-        "email": "nick.dekkers@essent.nl"
-    },
+    "author": "Essent",
     "bugs": {
         "url": "https://github.com/Essent/nativescript-flashlight/issues"
     },
