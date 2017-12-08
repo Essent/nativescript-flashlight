@@ -1,4 +1,4 @@
-export declare abstract class FlashLightCommon {
+export declare abstract class Common {
     isOn: boolean;
     toggle(arg: any): void;
     protected checkAvailability(): void;

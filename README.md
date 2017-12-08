@@ -26,7 +26,7 @@ Or if you’re using TypeScript, `import` the module:
 ```js
 // TypeScript
 import { FlashLight } from 'nativescript-flashlight/flashlight.android';
-let flashLight: FlashLight = FlashLight.getInstance(); 
+let flashLight: FlashLight = FlashLight.getInstance();
 ```
 
 **Please note that you should call FlashLight.getInstance() in an appropriate lifecycle moment. If you call it to early the androidApplication might not be instantiated and the initialisation of the plugin might fail.**
